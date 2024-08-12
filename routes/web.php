@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FloorController;
+use App\Http\Controllers\FloorsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VacancyController;
 
@@ -15,6 +16,10 @@ Route::get('/config', function () {
 
 Route::get('/teste', function () {
     return view('vagas/andar-3');
+});
+
+Route::group(['prefix' => 'floor', 'as' => 'floor/'], function(){
+    Route::get('chouse/{floor}', [FloorsController::class, 'indexFloorOne']);
 });
 
 Route::group(['prefix' => 'config', 'as' => 'config/'], function(){
