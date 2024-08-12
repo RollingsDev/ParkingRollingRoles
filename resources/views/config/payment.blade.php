@@ -1,7 +1,7 @@
 <x-layout-config>
     <div class="container-fluid">
         <div class="row mt-4">
-            <h2>Andares</h2>
+            <h2>Métodos de Pagamento</h2>
         </div>
         <div class="row">
             <div class="col-6 offset-md-3">
@@ -14,22 +14,18 @@
                     <thead>
                       <tr>
                         <th scope="col">#Id</th>
-                        <th scope="col">Número</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Status</th>
                         <th scope="col" style="text-align: center">Ações</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($aResponse as $value)
-                        <form action="{{ route('config/floor.update', ['floor' => $value['id']]) }}" method="POST" name="form-{{ $value['id'] }}">
+                        @foreach ($aPayment as $value)
+                        <form action="{{ route('config/payment.update', ['payment' => $value['id']]) }}" method="POST" name="form-{{ $value['id'] }}">
                             @csrf
                             @method('PATCH')
                                 <tr>
                                     <th scope="row">{{ $value['id'] }}</th>
-                                    <td>
-                                        <input type="number" class="form-control" name="number" value="{{ $value['number'] }}">
-                                    </td>
                                     <td>
                                         <input type="text" class="form-control" name="name" value="{{ $value['name'] }}">
                                     </td>
@@ -42,7 +38,7 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-6">
-                                                <form action="{{ route('config/floor.destroy', ['floor' => $value['id']]) }}" method="POST" name="form-delete-{{ $value['id'] }}">
+                                                <form action="{{ route('config/payment.destroy', ['payment' => $value['id']]) }}" method="POST" name="form-delete-{{ $value['id'] }}">
                                                     @method('DELETE')
                                                     <button style="border: none; background-color:#fff">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash text-danger" viewBox="0 0 16 16">
@@ -73,17 +69,13 @@
   <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="modal-content" method="POST" action="{{ route('config/floor.store') }}">
+            <form class="modal-content" method="POST" action="{{ route('config/payment.store') }}">
                 @csrf
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Andar</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Número</span>
-                        <input type="number" class="form-control" name="number" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                    </div>
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Nome</span>
                         <input type="text" class="form-control" name="name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">

@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Config\FloorRequest;
-use App\Models\Floor;
+use App\Http\Requests\Config\PaymentRequest;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
-class FloorController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $aResponse = Floor::get(); 
+        $aPayment = Payment::get();
 
-        return view('config.floor', ['aResponse' => $aResponse]);
+        return view('config.payment', ['aPayment' => $aPayment]);
     }
 
     /**
@@ -29,17 +29,16 @@ class FloorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FloorRequest $request)
+    public function store(PaymentRequest $request)
     {
-        $aFloor = $request->validated();
+        $aPayment = $request->validated();
 
         try {
-            Floor::create($aFloor);
+            Payment::create($aPayment);
+            return $this->index();
         } catch (\Throwable $th) {
             return $this->index();
         }
-
-        return $this->index();
     }
 
     /**
@@ -61,13 +60,12 @@ class FloorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FloorRequest $request, string $id)
+    public function update(PaymentRequest $request, string $id)
     {
-        // dd($id, $request->validated());
-        $aFloor = $request->validated();
+        $aPayment = $request->validated();
 
         try {
-            Floor::whereid($id)->update($aFloor);
+            Payment::whereId($id)->update($aPayment);
             return $this->index();
         } catch (\Throwable $th) {
             return $this->index();
@@ -80,9 +78,9 @@ class FloorController extends Controller
     public function destroy(string $id)
     {
         try {
-            $floor = Floor::findOrFail($id);
-            $floor->delete();
-
+            $payment = Payment::findOrFail($id);
+            $payment->delete();
+            
             return $this->index();
         } catch (\Throwable $th) {
             return $this->index();

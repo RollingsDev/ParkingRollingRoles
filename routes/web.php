@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\FloorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FloorController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\VacancyController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,4 +23,8 @@ Route::group(['prefix' => 'config', 'as' => 'config/'], function(){
     });
 
     Route::resource('floor', FloorController::class);
+
+    Route::resource('payment', PaymentController::class);
+    
+    Route::resource('vacancy', VacancyController::class);
 });

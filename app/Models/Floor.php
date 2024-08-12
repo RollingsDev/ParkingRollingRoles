@@ -15,4 +15,8 @@ class Floor extends Model
         , 'status'
     ];
 
+    public function vacancy()
+    {
+        return $this->hasOne(Vacancy::class, 'floor_id', 'id');
+    }
 }

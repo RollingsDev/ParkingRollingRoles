@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Config\FloorRequest;
+use App\Http\Requests\Config\VacancyRequest;
 use App\Models\Floor;
+use App\Models\Vacancy;
 use Illuminate\Http\Request;
 
-class FloorController extends Controller
+class VacancyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $aResponse = Floor::get(); 
+        $aVacancy = Vacancy::with('floor')->get();
+        $aFloor   = Floor::get();
 
-        return view('config.floor', ['aResponse' => $aResponse]);
+        return view('config.vacancy', ['aVacancy' => $aVacancy, 'aFloor' => $aFloor]);
     }
 
     /**
@@ -29,25 +31,32 @@ class FloorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FloorRequest $request)
+    public function store(VacancyRequest $request)
     {
-        $aFloor = $request->validated();
+        $aVacancy = $request->validated();
 
         try {
-            Floor::create($aFloor);
+            Vacancy::create($aVacancy);
+            return $this->index();
         } catch (\Throwable $th) {
             return $this->index();
         }
-
-        return $this->index();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $floor_id = null)
     {
-        //
+        $aVacancy = Vacancy::with('floor')
+            ->when($floor_id, function ($query, $floor_id) {
+                return $query->where('floor_id', $floor_id);
+            })
+            ->get();
+    
+        $aFloor = Floor::all();
+    
+        return view('config.vacancy', ['aVacancy' => $aVacancy, 'aFloor' => $aFloor]);
     }
 
     /**
@@ -61,13 +70,12 @@ class FloorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FloorRequest $request, string $id)
+    public function update(VacancyRequest $request, string $id)
     {
-        // dd($id, $request->validated());
-        $aFloor = $request->validated();
+        $aVacancy = $request->validated();
 
         try {
-            Floor::whereid($id)->update($aFloor);
+            Vacancy::whereId($id)->update($aVacancy);
             return $this->index();
         } catch (\Throwable $th) {
             return $this->index();
@@ -80,9 +88,9 @@ class FloorController extends Controller
     public function destroy(string $id)
     {
         try {
-            $floor = Floor::findOrFail($id);
-            $floor->delete();
-
+            $vacancy = Vacancy::findOrFail($id);
+            $vacancy->delete();
+            
             return $this->index();
         } catch (\Throwable $th) {
             return $this->index();

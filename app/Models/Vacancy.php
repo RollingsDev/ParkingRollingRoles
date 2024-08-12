@@ -14,4 +14,9 @@ class Vacancy extends Model
         , 'status'
         , 'floor_id'
     ];
+
+    public function floor()
+    {
+        return $this->hasMany(Floor::class, 'id', 'floor_id');
+    }
 }

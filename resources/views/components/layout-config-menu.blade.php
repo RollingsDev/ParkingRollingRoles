@@ -14,10 +14,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link text-white" href="/teste">Vagas</a>
+        <a class="nav-link text-white" href="/config/vacancy">Vagas</a>
         <a class="nav-link text-white" href="/config/floor">Andares</a>
-        <a class="nav-link text-white" href="#">Status</a>
-        <a class="nav-link text-white" href="#">Pagamentos</a>
+        <a class="nav-link text-white" href="/config/payment">Pagamentos</a>
       </div>
     </div>
   </div>

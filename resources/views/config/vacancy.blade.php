@@ -1,7 +1,10 @@
+<?php
+    $aSelect = isset($_REQUEST['floor_id']) ? $_REQUEST['floor_id'] : '';
+?>
 <x-layout-config>
     <div class="container-fluid">
         <div class="row mt-4">
-            <h2>Andares</h2>
+            <h2>Vagas</h2>
         </div>
         <div class="row">
             <div class="col-6 offset-md-3">
@@ -12,17 +15,27 @@
                 </div>
                 <table class="table table-hover">
                     <thead>
-                      <tr>
-                        <th scope="col">#Id</th>
-                        <th scope="col">Número</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Status</th>
-                        <th scope="col" style="text-align: center">Ações</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">#Id</th>
+                            <th scope="col">Número</th>
+                            <th scope="col">
+                                <form class="input-group input-group-sm mb-3" method="GET" action="{{ route('config/vacancy.show', ['vacancy' => '0']) }}" id="vacancy-form">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Andar</span>
+                                    <select name="floor_id" id="floor-select" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                        <option value="" {{ empty($aSelect) ? 'selected' : '' }}>Todos</option>
+                                        @foreach ($aFloor as $floor)
+                                            <option value="{{ $floor['id'] }}" {{ $aSelect == $floor['id'] ? 'selected' : '' }}>{{ $floor['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </form>
+                            </th>
+                            <th scope="col">Status</th>
+                            <th scope="col" style="text-align: center">Ações</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        @foreach ($aResponse as $value)
-                        <form action="{{ route('config/floor.update', ['floor' => $value['id']]) }}" method="POST" name="form-{{ $value['id'] }}">
+                        @foreach ($aVacancy as $value)
+                        <form action="{{ route('config/vacancy.update', ['vacancy' => $value['id']]) }}" method="POST" name="form-{{ $value['id'] }}">
                             @csrf
                             @method('PATCH')
                                 <tr>
@@ -31,7 +44,11 @@
                                         <input type="number" class="form-control" name="number" value="{{ $value['number'] }}">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" name="name" value="{{ $value['name'] }}">
+                                        <select name="floor_id" class="form-control">
+                                            @foreach ($aFloor as $floor)
+                                                <option value="{{ $floor['id'] }}" {{ $floor['id'] == $value['floor_id'] ? 'selected' : '' }} >{{ $floor['name'] }}</option>
+                                            @endforeach
+                                        </select>                                    
                                     </td>
                                     <td>
                                         <select name="status" class="form-control">
@@ -42,7 +59,7 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-6">
-                                                <form action="{{ route('config/floor.destroy', ['floor' => $value['id']]) }}" method="POST" name="form-delete-{{ $value['id'] }}">
+                                                <form action="{{ route('config/vacancy.destroy', ['vacancy' => $value['id']]) }}" method="POST" name="form-delete-{{ $value['id'] }}">
                                                     @method('DELETE')
                                                     <button style="border: none; background-color:#fff">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash text-danger" viewBox="0 0 16 16">
@@ -73,7 +90,7 @@
   <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="modal-content" method="POST" action="{{ route('config/floor.store') }}">
+            <form class="modal-content" method="POST" action="{{ route('config/vacancy.store') }}">
                 @csrf
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Andar</h1>
@@ -85,8 +102,13 @@
                         <input type="number" class="form-control" name="number" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Nome</span>
-                        <input type="text" class="form-control" name="name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Andar</span>
+                        <select name="floor_id" id="inputGroup-sizing-sm" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <option value="" disabled selected>Selecione</option>
+                            @foreach ($aFloor as $value)
+                                <option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Status</span>
@@ -104,3 +126,20 @@
         </div>
     </div>
 </x-layout-config>
+<script>
+$(document).ready(function() {
+    $('#floor-select').on('change', function() {
+        var floorId = $(this).val(); // Obtém o valor selecionado
+        floorId = floorId > 0 ? floorId : 0
+
+        if (floorId >= 0) {
+            actionUrl = `http://127.0.0.1:8000/config/vacancy/${floorId}`
+        }
+        console.log(actionUrl)
+        $('#vacancy-form').attr('action', actionUrl); // Atualiza o atributo action do formulário
+        console.log(actionUrl)
+        $('#vacancy-form').submit(); // Submete o formulário
+    });
+
+});
+</script>
