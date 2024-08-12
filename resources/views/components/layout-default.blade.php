@@ -27,10 +27,10 @@
             <div class="col-1 bg-dark text-white full-height" style="height: 100vh; overflow-y: auto">
                 <x-navbar></x-navbar>
             </div>
-            <div class="col-11">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
+            <div class="col-11 p-0">
+                <div class="container-fluid p-0">
+                    <div class="row p-0">
+                        <div class="col-12 p-0">
                             {{ $slot }}
                         </div>
                     </div>

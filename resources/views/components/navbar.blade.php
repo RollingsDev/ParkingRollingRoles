@@ -1,6 +1,10 @@
 <ul style="list-style: none" class="m-0 p-0">
     <li class="mt-4 mb-4">
-        <h2 class="text-center">Parking</h2>
+        <h2 class="text-center">
+            <a href="/">
+                Parking
+            </a>
+        </h2>
     </li>
     <li>
         <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,6 +37,6 @@
         <button class="btn btn-dark">Rentabilidade</button>
     </li>
     <li>
-        <button class="btn btn-dark">Configurações</button>
+        <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/config">Configurações</a>
     </li>
 </ul>
