@@ -11,9 +11,9 @@
             Vagas
         </button>
         <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item" href="floor/chouse/1">1 Andar</a></li>
-            <li><a class="dropdown-item" href="floor/chouse/2">2 Andar</a></li>
-            <li><a class="dropdown-item" href="floor/chouse/3">3 Andar</a></li>
+            <li><a class="dropdown-item" href="{{ route('floor/floor', ['floor' => 1]) }}">1 Andar</a></li>
+            <li><a class="dropdown-item" href="{{ route('floor/floor', ['floor' => 2]) }}">2 Andar</a></li>
+            <li><a class="dropdown-item" href="{{ route('floor/floor', ['floor' => 3]) }}">3 Andar</a></li>
         </ul>
     </li>
     <li>

@@ -19,7 +19,7 @@ Route::get('/teste', function () {
 });
 
 Route::group(['prefix' => 'floor', 'as' => 'floor/'], function(){
-    Route::get('chouse/{floor}', [FloorsController::class, 'indexFloorOne']);
+    Route::get('chouse/{floor}', [FloorsController::class, 'indexFloorOne'])->name('floor');
 });
 
 Route::group(['prefix' => 'config', 'as' => 'config/'], function(){

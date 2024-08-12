@@ -32,19 +32,7 @@ class FloorsController extends Controller
 
     public function configFloor($level)
     {
-        $aConfig = [
-            1 => [
-                  'row' => 2
-                , 'int' => 20
-            ]
-            , 2 => [
-                  'row' => 2
-                , 'int' => 25
-            ]
-            , 3 => [
-                  'row' => 2
-                , 'int' => 30
-            ]
-        ];
+
+        
     }
 }
