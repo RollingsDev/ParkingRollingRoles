@@ -6,14 +6,15 @@
             @if ($key == 0)
                 <div class="row">
             @endif
-            
+            {{-- @dd($value->client[0]->code) --}}
             <div class="col">
                 <div class="l-c {{ isset($aResponse['occupied'][$value->id]) ? 'bg-danger' : 'bg-success' }}">
                     <form action="{{ route('floor/takeThePosition') }}" method="POST">
                         @csrf
                         @method('POST')
                         <button name="vacancy_id" value="{{ $value['id'] }}" style="background: none; border:none">
-                            Vaga {{ $value['number'] }}
+                            Vaga {{ $value['number'] }} {{ isset($value->client[0]->code) ? $value->client[0]->code : '' }}
+                            {{ isset($value->client[0]->formatted_arrival_date) ? $value->client[0]->formatted_arrival_date : '' }}
                         </button>
                     </form>
                 </div>

@@ -13,8 +13,12 @@ class ClientFloorsController extends Controller
 {
     public function indexFloor(string $floor)
     {
-        $aVacancy = Vacancy::whereFloorId($floor)->get();
-
+        
+        $aVacancy = Vacancy::with(['client' => function ($query) {  
+            $query->whereDepartureDate(NULL)  
+                  ->selectRaw("*, DATE_FORMAT(arrival_date, '%H:%i:%s') as formatted_arrival_date");  
+        }])->whereFloorId($floor)->get(); 
+        
         $line = match($floor) {
               '1' => 10
             , '2' => 13
