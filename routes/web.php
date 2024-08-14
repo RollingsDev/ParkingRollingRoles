@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FloorController;
-use App\Http\Controllers\FloorsController;
+use App\Http\Controllers\ClientFloorsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VacancyController;
 
@@ -19,7 +19,9 @@ Route::get('/teste', function () {
 });
 
 Route::group(['prefix' => 'floor', 'as' => 'floor/'], function(){
-    Route::get('chouse/{floor}', [FloorsController::class, 'indexFloorOne'])->name('floor');
+    Route::get('chouse/{floor}', [ClientFloorsController::class, 'indexFloor'])->name('floor');
+    
+    Route::post('takeThePosition', [ClientFloorsController::class, 'takeThePosition'])->name('takeThePosition');
 });
 
 Route::group(['prefix' => 'config', 'as' => 'config/'], function(){

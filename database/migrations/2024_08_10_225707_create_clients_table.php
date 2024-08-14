@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->char('code');
+            $table->char('plate');
             $table->foreignId('vacancy_id')->nullable()->constrained('vacancies', 'id');
             $table->foreignId('payment_id')->nullable()->constrained('payments', 'id');
             $table->char('price')->nullable();

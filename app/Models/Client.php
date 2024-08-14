@@ -11,6 +11,7 @@ class Client extends Model
 
     protected $fillable = [
           'code'
+        , 'plate'
         , 'vacancy_id'
         , 'payment_id'
         , 'price'
@@ -18,4 +19,9 @@ class Client extends Model
         , 'arrival_date'
         , 'departure_date'
     ];
+
+    public function vacancy()
+    {
+        return $this->hasMany(Vacancy::class, 'id', 'vacancy_id');
+    }
 }

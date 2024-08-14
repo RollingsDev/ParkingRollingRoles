@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Config\VacancyRequest;
 use App\Models\Floor;
 use App\Models\Vacancy;
-use Illuminate\Http\Request;
 
 class VacancyController extends Controller
 {

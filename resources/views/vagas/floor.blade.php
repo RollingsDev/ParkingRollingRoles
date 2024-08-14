@@ -2,14 +2,20 @@
     <div style="margin-left:200px" class="fixed-top">
         <h4 class="title mt-4">{{ $aResponse['floor'] }}</h4>
         @foreach ($aResponse['vacancy'] as $key => $value)
-            
+
             @if ($key == 0)
                 <div class="row">
             @endif
-
+            
             <div class="col">
-                <div class="l-c">
-                    Vaga {{ $value['number'] }}
+                <div class="l-c {{ isset($aResponse['occupied'][$value->id]) ? 'bg-danger' : 'bg-success' }}">
+                    <form action="{{ route('floor/takeThePosition') }}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <button name="vacancy_id" value="{{ $value['id'] }}" style="background: none; border:none">
+                            Vaga {{ $value['number'] }}
+                        </button>
+                    </form>
                 </div>
             </div>
 

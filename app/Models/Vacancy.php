@@ -19,4 +19,9 @@ class Vacancy extends Model
     {
         return $this->hasMany(Floor::class, 'id', 'floor_id');
     }
+
+    public function client()
+    {
+        return $this->hasMany(Client::class, 'vacancy_id', 'id');
+    }
 }
