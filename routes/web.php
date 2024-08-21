@@ -3,11 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\ClientFloorsController;
+use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VacancyController;
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/', [NavbarController::class, 'index']);
+
+Route::get('/', [NavbarController::class, 'index']);
+// Route::resource('navbar', NavbarController::class)->except(['index']);
+Route::group(['prefix' => 'menu', 'as' => 'menu/'], function(){
+    Route::post('search', [NavbarController::class, 'search'])->name('search');
 });
 
 Route::get('/config', function () {
