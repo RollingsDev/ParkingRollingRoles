@@ -90,9 +90,9 @@ class VacancyController extends Controller
             $vacancy = Vacancy::findOrFail($id);
             $vacancy->delete();
             
-            return $this->index();
+            return json_encode('success');
         } catch (\Throwable $th) {
-            return $this->index();
+            return json_encode('error');
         }
     }
 }

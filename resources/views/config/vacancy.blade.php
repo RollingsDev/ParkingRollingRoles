@@ -2,9 +2,10 @@
     $aSelect = isset($_REQUEST['floor_id']) ? $_REQUEST['floor_id'] : '';
 ?>
 <x-layout-config>
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-left:140px">
         <div class="row mt-4">
-            <h2>Vagas</h2>
+            <h2>Config - Vagas</h2>
+            <hr>
         </div>
         <div class="row">
             <div class="col-6 offset-md-3">
@@ -19,7 +20,7 @@
                             <th scope="col">#Id</th>
                             <th scope="col">Número</th>
                             <th scope="col">
-                                <form class="input-group input-group-sm mb-3" method="GET" action="{{ route('config/vacancy.show', ['vacancy' => '0']) }}" id="vacancy-form">
+                                <form class="input-group input-group-sm" method="GET" action="{{ route('config/vacancy.show', ['vacancy' => '0']) }}" id="vacancy-form">
                                     <span class="input-group-text" id="inputGroup-sizing-sm">Andar</span>
                                     <select name="floor_id" id="floor-select" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                         <option value="" {{ empty($aSelect) ? 'selected' : '' }}>Todos</option>
@@ -59,15 +60,12 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-6">
-                                                <form action="{{ route('config/vacancy.destroy', ['vacancy' => $value['id']]) }}" method="POST" name="form-delete-{{ $value['id'] }}">
-                                                    @method('DELETE')
-                                                    <button style="border: none; background-color:#fff">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash text-danger" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                                        </svg>
-                                                    </button>
-                                                </form>
+                                                <button style="border: none; background-color:#fff" onclick="deleteById('config/vacancy/{{ $value['id'] }}', {{ $value['id'] }}, '{{ $value['number'] }}')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash text-danger" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                                    </svg>
+                                                </button>
                                             </div>
                                             <div class="col-6">
                                                 <button style="border: none; background-color:#fff">

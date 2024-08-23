@@ -63,7 +63,6 @@ class FloorController extends Controller
      */
     public function update(FloorRequest $request, string $id)
     {
-        // dd($id, $request->validated());
         $aFloor = $request->validated();
 
         try {
@@ -83,9 +82,9 @@ class FloorController extends Controller
             $floor = Floor::findOrFail($id);
             $floor->delete();
 
-            return $this->index();
+            return json_encode('success');
         } catch (\Throwable $th) {
-            return $this->index();
+            return json_encode('error');
         }
     }
 }

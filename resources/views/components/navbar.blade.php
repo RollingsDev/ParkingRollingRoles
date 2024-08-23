@@ -1,7 +1,7 @@
 <ul style="list-style: none" class="m-0 p-0">
     <li class="mt-4 mb-4">
         <h2 class="text-center">
-            <a href="/">
+            <a href="/" style="text-decoration: none" class="text-white">
                 Parking
             </a>
         </h2>
@@ -37,6 +37,11 @@
         <button class="btn btn-dark">Rentabilidade</button>
     </li>
     <li>
-        <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/config">Configurações</a>
+        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Configurações</button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="/config/vacancy">Vagas</a></li>
+            <li><a class="dropdown-item" href="/config/floor">Andares</a></li>
+            <li><a class="dropdown-item" href="/config/payment">Pagamento</a></li>
+        </ul>
     </li>
 </ul>

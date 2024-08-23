@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NavbarRequest;
 use App\Http\Requests\SearchWelcomeRequest;
 use App\Models\Client;
 use App\Models\Floor;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class NavbarController extends Controller
@@ -106,7 +106,18 @@ class NavbarController extends Controller
                 return $item;
             });
         }
-
+        
         return $this->index($response);
+    }
+
+    public function returnView(NavbarRequest $request)
+    {
+        $aRequest = $request->validated();
+        
+        $view = match ($aRequest['btn']) {
+              'config' => 'config/index'  
+        };
+
+        return view($view);
     }
 }

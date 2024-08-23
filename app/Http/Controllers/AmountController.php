@@ -2,28 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Config\PaymentRequest;
+use App\Http\Requests\Config\AmountRequest;
 use App\Models\Amount;
-use App\Models\Payment;
 use Illuminate\Http\Request;
 
-class PaymentController extends Controller
+class AmountController extends Controller
 {
+    public $payment;
+
+    public function __construct() {
+        $this->payment = new PaymentController;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $aPayment = Payment::get();
-
-        $aAmount = Amount::get();
-
-        $aResponse = [
-              'aPayment' => $aPayment
-            , 'aAmount'  => $aAmount
-        ];
-
-        return view('config.payment', $aResponse);
+        return $this->payment->index();
     }
 
     /**
@@ -37,12 +33,12 @@ class PaymentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PaymentRequest $request)
+    public function store(AmountRequest $request)
     {
-        $aPayment = $request->validated();
+        $aAmount = $request->validated();
 
         try {
-            Payment::create($aPayment);
+            Amount::create($aAmount);
             return $this->index();
         } catch (\Throwable $th) {
             return $this->index();
@@ -52,7 +48,7 @@ class PaymentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Amount $amount)
     {
         //
     }
@@ -60,7 +56,7 @@ class PaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Amount $amount)
     {
         //
     }
@@ -68,12 +64,13 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PaymentRequest $request, string $id)
+    public function update(AmountRequest $request, string $id)
     {
-        $aPayment = $request->validated();
+        // dd($id);
+        $aAmount = $request->validate();
 
         try {
-            Payment::whereId($id)->update($aPayment);
+            Amount::whereId($id)->update($aAmount);
             return $this->index();
         } catch (\Throwable $th) {
             return $this->index();
@@ -83,12 +80,10 @@ class PaymentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Amount $amount)
     {
         try {
-            $payment = Payment::findOrFail($id);
-            $payment->delete();
-            
+            $amount->delete();
             return json_encode('success');
         } catch (\Throwable $th) {
             return json_encode('error');

@@ -24,7 +24,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-1 bg-dark text-white full-height" style="height: 100vh; overflow-y: auto">
+            <div class="col-1 bg-dark text-white full-height fixed-top" style="height: 100vh; overflow-y: auto">
                 <x-navbar></x-navbar>
             </div>
             <div class="col-11 p-0">
@@ -41,5 +41,6 @@
 
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/config/delete.js') }}"></script>
 </body>
 </html>

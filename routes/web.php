@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AmountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\ClientFloorsController;
@@ -33,6 +34,8 @@ Route::group(['prefix' => 'floor', 'as' => 'floor/'], function(){
     Route::post('takeThePosition', [ClientFloorsController::class, 'takeThePosition'])->name('takeThePosition');
 });
 
+Route::post('config', [NavbarController::class, 'returnView'])->name('navbar');
+
 Route::group(['prefix' => 'config', 'as' => 'config/'], function(){
     Route::get('floor', function () {
         return view('config/floor');
@@ -43,4 +46,6 @@ Route::group(['prefix' => 'config', 'as' => 'config/'], function(){
     Route::resource('payment', PaymentController::class);
     
     Route::resource('vacancy', VacancyController::class);
+
+    Route::resource('amount', AmountController::class);
 });
