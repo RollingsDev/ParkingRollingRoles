@@ -36,9 +36,14 @@ class AmountController extends Controller
     public function store(AmountRequest $request)
     {
         $aAmount = $request->validated();
+        $aCreate = [
+              'time'   => "$aAmount[hour]:$aAmount[minute]"
+            , 'price'  => $aAmount['price']
+            , 'status' => $aAmount['status']
+        ];
 
         try {
-            Amount::create($aAmount);
+            Amount::create($aCreate);
             return $this->index();
         } catch (\Throwable $th) {
             return $this->index();
@@ -66,11 +71,15 @@ class AmountController extends Controller
      */
     public function update(AmountRequest $request, string $id)
     {
-        // dd($id);
-        $aAmount = $request->validate();
+        $aAmount = $request->validated();
+        $aUpdate = [
+              'time'   => "$aAmount[hour]:$aAmount[minute]"
+            , 'price'  => $aAmount['price']
+            , 'status' => $aAmount['status']
+        ];
 
         try {
-            Amount::whereId($id)->update($aAmount);
+            Amount::whereId($id)->update($aUpdate);
             return $this->index();
         } catch (\Throwable $th) {
             return $this->index();

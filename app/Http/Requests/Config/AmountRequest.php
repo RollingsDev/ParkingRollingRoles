@@ -22,7 +22,8 @@ class AmountRequest extends FormRequest
     public function rules(): array
     {
         return [
-              'time'   => 'required'
+              'hour'   => 'required'
+            , 'minute' => 'required'
             , 'price'  => 'required'
             , 'status' => 'required'
         ];

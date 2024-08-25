@@ -18,6 +18,10 @@ class PaymentController extends Controller
 
         $aAmount = Amount::get();
 
+        foreach ($aAmount as $key => $value) {
+            list($aAmount[$key]['hour'], $aAmount[$key]['minute']) = explode(':', $value['time']); 
+        }
+
         $aResponse = [
               'aPayment' => $aPayment
             , 'aAmount'  => $aAmount

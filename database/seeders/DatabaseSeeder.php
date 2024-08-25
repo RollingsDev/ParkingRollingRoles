@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
               FloorSeeder::class
             , PaymentSeeder::class
             , VacancySeeder::class
+            , AmountSeeder::class
         ]);
     }
 }

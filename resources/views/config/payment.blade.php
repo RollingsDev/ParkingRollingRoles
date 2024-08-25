@@ -29,16 +29,33 @@
                                 <tr>
                                     <th scope="row">{{ $value['id'] }}</th>
                                     <td>
-                                        <input type="text" class="form-control" name="time" value="{{ $value['time'] }}">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="input-group input-group-sm mb-3">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">Hr</span>
+                                                    <input type="number" class="form-control" name="hour" max="24" min="0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{ $value->hour }}">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="input-group input-group-sm mb-3">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
+                                                    <input type="number" class="form-control" name="minute" step="10" max="60" min="0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{ $value->minute }}">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" name="price" value="{{ $value['price'] }}">
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" class="form-control" name="price" value="{{ $value['price'] }}" >
+                                        </div>
                                     </td>
                                     <td>
-                                        <select name="status" class="form-control">
-                                            <option value="1" {{ $value['status'] == '1' ? 'selected' : '' }}>Ativo</option>    
-                                            <option value="0" {{ $value['status'] == '0' ? 'selected' : '' }}>Inativo</option>    
-                                        </select>
+                                        <div class="input-group input-group-sm">
+                                            <select name="status" class="form-control">
+                                                <option value="1" {{ $value['status'] == '1' ? 'selected' : '' }}>Ativo</option>    
+                                                <option value="0" {{ $value['status'] == '0' ? 'selected' : '' }}>Inativo</option>    
+                                            </select>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="row">
@@ -140,9 +157,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Tempo</span>
-                        <input type="number" class="form-control" name="time" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Em minutos">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Horas</span>
+                                <input type="number" class="form-control" name="hour" max="24" min="0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="00">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Minutos</span>
+                                <input type="number" class="form-control" name="minute" step="10" max="60" min="0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="00">
+                            </div>
+                        </div>
                     </div>
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Preço</span>
