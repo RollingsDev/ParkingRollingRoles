@@ -40,6 +40,11 @@ class ClientFloorsController extends Controller
         return view('vagas.floor', ['aResponse' => $aResponse]);
     }
 
+    public function flowFloor()
+    {
+        return view('vagas.flowFloor');
+    }
+
     public function checkFloor($floor)
     {
         $response = Client::with(['vacancy' => function ($query) use ($floor) {  

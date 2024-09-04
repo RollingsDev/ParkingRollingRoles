@@ -34,6 +34,8 @@ Route::group(['prefix' => 'floor', 'as' => 'floor/'], function(){
     Route::post('takeThePosition', [ClientFloorsController::class, 'takeThePosition'])->name('takeThePosition');
 });
 
+Route::get('flow', ClientFloorsController::class, 'flowFloor');
+
 Route::post('config', [NavbarController::class, 'returnView'])->name('navbar');
 
 Route::group(['prefix' => 'config', 'as' => 'config/'], function(){
